@@ -344,11 +344,13 @@ function render(){
   const dados = licitacoes.filter(l =>
     (filtro==="TODOS" || l.status===filtro) &&
     (
-      l.instituicao.toUpperCase().includes(busca.toUpperCase()) ||
-      l.codigo.toUpperCase().includes(busca.toUpperCase()) ||
-      l.criterio.toUpperCase().includes(busca.toUpperCase()) ||
-      l.modo.toUpperCase().includes(busca.toUpperCase()) ||
-      String(l.valorBR).includes(busca)
+(
+  l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
+  l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
+  l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
+  l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
+  String(l.valorBR || "").includes(busca)
+)
     )
   );
 
