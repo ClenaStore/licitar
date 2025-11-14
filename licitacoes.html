@@ -5,25 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>LICITAR • Licitações</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
 <style>
-/* ============================
-   PALETA + VISUAL PREMIUM
-============================ */
 :root{
   --bg:#eef2f7;
   --card:#ffffff;
-  --card-glass:#ffffffdd;
   --azul:#0b1e39;
   --azul-escuro:#091627;
   --muted:#6f7883;
   --danger:#dc2626;
   --radius:22px;
-  --line:#e5e7eb;
   --shadow:0 8px 28px rgba(0,0,0,.12);
-
+  --line:#e5e7eb;
   --pendente:#ffbf00;
   --futura:#0077ff;
   --andamento:#ff7f11;
@@ -31,9 +25,7 @@
   --suspensa:#d7263d;
 }
 
-/* ============================
-   BASE
-============================ */
+/* BASE */
 body{
   margin:0;
   padding:40px;
@@ -41,7 +33,6 @@ body{
   font-family:"Inter",sans-serif;
   color:var(--azul);
 }
-
 .titulo{
   font-size:42px;
   font-weight:800;
@@ -49,9 +40,7 @@ body{
   letter-spacing:-1px;
 }
 
-/* ============================
-   INPUT DE BUSCA
-============================ */
+/* BUSCA */
 .topo{ margin-bottom:26px; }
 .input{
   width:420px;
@@ -60,55 +49,41 @@ body{
   border:1px solid #ccd2d9;
   background:white;
   font-size:15px;
+  transition:.2s;
 }
-.input:focus{
-  border-color:var(--azul);
-  outline:none;
-}
+.input:focus{ border-color:var(--azul); outline:none; }
 
-/* ============================
-   FILTROS
-============================ */
-.filtros{
-  display:flex;
-  gap:12px;
-  margin-bottom:28px;
-  flex-wrap:wrap;
-}
+/* FILTROS */
+.filtros{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
 .chip{
   padding:10px 22px;
   border-radius:999px;
-  background:#fff;
+  background:white;
   border:1px solid #ccd2d9;
   cursor:pointer;
   font-weight:600;
   transition:.2s;
 }
 .chip:hover{ background:#e9edf2; }
-.chip.ativo{ background:var(--azul); color:#fff; }
+.chip.ativo{ background:var(--azul); color:white; }
 
-/* ============================
-   GRID
-============================ */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
   gap:32px;
 }
 
-/* ============================
-   CARD
-============================ */
+/* CARD */
 .card{
-  background:var(--card-glass);
-  backdrop-filter:blur(6px);
+  background:white;
   border-radius:var(--radius);
   padding:28px;
-  border:1px solid rgba(255,255,255,0.55);
+  border:1px solid #eee;
   box-shadow:var(--shadow);
   transition:.25s;
 }
-.card:hover{ transform:translateY(-6px); }
+.card:hover{ transform:translateY(-5px); }
 
 .card h3{
   font-size:23px;
@@ -117,7 +92,7 @@ body{
   margin-bottom:14px;
 }
 
-/* BLOCO INFO */
+/* INFO */
 .info-block{
   margin-top:10px;
   padding:14px 16px;
@@ -125,12 +100,9 @@ body{
   border-radius:14px;
   border:1px solid #e3e6ea;
 }
-.info-line{
-  font-size:14.6px;
-  margin-bottom:6px;
-}
+.info-line{ font-size:14.6px; margin-bottom:6px; }
 
-/* BADGE */
+/* STATUS */
 .badge{
   padding:8px 16px;
   border-radius:12px;
@@ -139,11 +111,11 @@ body{
   margin-top:14px;
   display:inline-block;
 }
-.st-PENDENTE{ background:var(--pendente); color:white; }
-.st-FUTURA{ background:var(--futura); color:white; }
-.st-EM_ANDAMENTO{ background:var(--andamento); color:white; }
-.st-FINALIZADA{ background:var(--finalizada); color:white; }
-.st-SUSPENSA{ background:var(--suspensa); color:white; }
+.st-PENDENTE{background:var(--pendente);color:#fff;}
+.st-FUTURA{background:var(--futura);color:#fff;}
+.st-EM_ANDAMENTO{background:var(--andamento);color:#fff;}
+.st-FINALIZADA{background:var(--finalizada);color:#fff;}
+.st-SUSPENSA{background:var(--suspensa);color:#fff;}
 
 /* AÇÕES */
 .card-actions{
@@ -170,9 +142,7 @@ select{
 }
 .btn:hover{ background:#132a4d; }
 
-/* ============================
-   OVERLAY
-============================ */
+/* OVERLAY */
 #overlayLoad{
   position:fixed;
   inset:0;
@@ -180,12 +150,11 @@ select{
   display:none;
   justify-content:center;
   align-items:center;
-  z-index:500;
-  backdrop-filter:blur(6px);
+  z-index:999;
+  backdrop-filter:blur(5px);
 }
 .loader{
-  width:70px;
-  height:70px;
+  width:70px; height:70px;
   border-radius:50%;
   border:7px solid #ddd;
   border-top:7px solid var(--azul);
@@ -193,9 +162,7 @@ select{
 }
 @keyframes spin{ to{transform:rotate(360deg);} }
 
-/* ============================
-   MODAL
-============================ */
+/* MODAL */
 .modal{
   position:fixed;
   inset:0;
@@ -240,10 +207,7 @@ select{
   border:1px solid var(--line);
   width:280px;
 }
-.modal-body{
-  padding:16px 30px;
-  overflow:auto;
-}
+.modal-body{ padding:16px 30px; overflow:auto; }
 .modal-foot{
   padding:20px 30px;
   background:white;
@@ -272,8 +236,6 @@ select{
 </head>
 
 <body>
-
-<!-- OVERLAY -->
 <div id="overlayLoad"><div class="loader"></div></div>
 
 <div class="titulo">LICITAR • Licitações</div>
@@ -293,10 +255,8 @@ select{
 
 <div class="grid" id="lista"></div>
 
-<!-- MODAL -->
 <div class="modal" id="modalItens">
   <div class="box">
-
     <div class="modal-head">
       <button class="closeBtn" onclick="fecharModal()">Fechar</button>
       <h2 id="tituloItens"></h2>
@@ -320,32 +280,22 @@ select{
         <tbody></tbody>
       </table>
     </div>
-
     <div class="modal-foot" id="totalGeral"></div>
-
   </div>
 </div>
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbwg9ZmsZpisEOI3J_3D0rS-Wwn0-dUD4yLVwxa7Yi1_pm0PAuu_HS3d7cB7Z5p0Il8s/exec";
-
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 
-let licitacoes = [];
-let filtro = "TODOS";
-let busca = "";
-let itensModal = [];
-let ordemAsc = true;
+let licitacoes = [], filtro="TODOS", busca="", itensModal=[], ordemAsc=true;
 
-function showOverlay(){ $('#overlayLoad').style.display = "flex"; }
-function hideOverlay(){ $('#overlayLoad').style.display = "none"; }
+function showOverlay(){ $('#overlayLoad').style.display="flex"; }
+function hideOverlay(){ $('#overlayLoad').style.display="none"; }
 
-function formatMoney(v){
-  return "R$ " + Number(v).toLocaleString("pt-BR",{minimumFractionDigits:4,maximumFractionDigits:4});
-}
+function formatMoney(v){ return "R$ "+Number(v).toLocaleString("pt-BR",{minimumFractionDigits:4,maximumFractionDigits:4}); }
 
-/* LISTAGEM */
 function render(){
   const lista = $('#lista');
   const dados = licitacoes.filter(l =>
@@ -358,93 +308,63 @@ function render(){
       String(l.valorBR)?.includes(busca)
     )
   );
+  if(dados.length===0){ lista.innerHTML="<p style='color:#6f7883'>Nenhuma licitação encontrada…</p>"; return; }
 
-  if(dados.length === 0){
-    lista.innerHTML = "<p style='color:#6f7883'>Nenhuma licitação encontrada…</p>";
-    return;
-  }
-
-  lista.innerHTML = dados.map(l => `
-<div class="card">
-  <h3>${l.instituicao}</h3>
-
-  <div class="info-block">
-    <div class="info-line"><b>Código:</b> ${l.codigo}</div>
-    <div class="info-line"><b>Data:</b> ${l.dataSessaoBR}</div>
-    <div class="info-line"><b>Valor:</b> ${formatMoney(l.valorBR)}</div>
-    <div class="info-line"><b>Critério:</b> ${l.criterio}</div>
-    <div class="info-line"><b>Modo:</b> ${l.modo}</div>
-  </div>
-
-  <div class="badge st-${l.status.replace(" ","_").toUpperCase()}">${l.status}</div>
-
-  <div class="card-actions">
-    <select onchange="alterarStatus('${l.codigo}', this.value)">
-      <option value="">Status…</option>
-      <option value="PENDENTE">Pendente</option>
-      <option value="FUTURA">Futura</option>
-      <option value="EM ANDAMENTO">Em andamento</option>
-      <option value="FINALIZADA">Finalizada</option>
-      <option value="SUSPENSA">Suspensa</option>
-    </select>
-
-    <button class="btn" onclick="verItens('${l.codigo}','${l.instituicao}')">
-      Ver itens
-    </button>
-  </div>
-</div>`).join('');
+  lista.innerHTML=dados.map(l=>`
+  <div class="card">
+    <h3>${l.instituicao}</h3>
+    <div class="info-block">
+      <div class="info-line"><b>Código:</b> ${l.codigo}</div>
+      <div class="info-line"><b>Data:</b> ${l.dataSessaoBR}</div>
+      <div class="info-line"><b>Valor:</b> ${formatMoney(l.valorBR)}</div>
+      <div class="info-line"><b>Critério:</b> ${l.criterio}</div>
+      <div class="info-line"><b>Modo:</b> ${l.modo}</div>
+    </div>
+    <div class="badge st-${l.status.replace(" ","_").toUpperCase()}">${l.status}</div>
+    <div class="card-actions">
+      <select onchange="alterarStatus('${l.codigo}', this.value)">
+        <option value="">Status…</option>
+        <option value="PENDENTE">Pendente</option>
+        <option value="FUTURA">Futura</option>
+        <option value="EM ANDAMENTO">Em andamento</option>
+        <option value="FINALIZADA">Finalizada</option>
+        <option value="SUSPENSA">Suspensa</option>
+      </select>
+      <button class="btn" onclick="verItens('${l.codigo}','${l.instituicao}')">Ver itens</button>
+    </div>
+  </div>`).join('');
 }
-
-$('#busca').addEventListener('input', e=>{
-  busca = e.target.value;
-  render();
-});
-
-$$('#filtros .chip').forEach(ch=>{
-  ch.addEventListener('click',()=>{
-    $$('#filtros .chip').forEach(x=>x.classList.remove('ativo'));
-    ch.classList.add('ativo');
-    filtro = ch.dataset.status;
-    render();
-  });
-});
 
 async function alterarStatus(codigo, novoStatus){
-  if(!novoStatus){ alert("Selecione um status válido."); return; }
+  if(!novoStatus){alert("Selecione um status válido.");return;}
   showOverlay();
-  const payload = {action:"updateLicitacao", codigo, status:novoStatus};
-  const r = await fetch(API,{ method:"POST", body:JSON.stringify(payload)});
-  const j = await r.json();
-  hideOverlay();
-  if(j.ok){ alert("Status atualizado!"); carregar(); } 
-  else alert("Erro ao atualizar.");
+  const payload={action:"updateLicitacao",codigo,status:novoStatus};
+  const r=await fetch(API,{method:"POST",body:JSON.stringify(payload)});
+  const j=await r.json(); hideOverlay();
+  if(j.ok){alert("Status atualizado!");carregar();}else alert("Erro ao atualizar.");
 }
 
-/* MODAL */
 async function verItens(codigo,nome){
   showOverlay();
-  $('#tituloItens').innerText = "Itens da Licitação";
-  $('#subItens').innerText = nome;
-  const r = await fetch(`${API}?action=getItens&codigo=${codigo}`);
-  const j = await r.json();
-  itensModal = j.itens;
+  $('#tituloItens').innerText="Itens da Licitação";
+  $('#subItens').innerText=nome;
+  const r=await fetch(`${API}?action=getItens&codigo=${codigo}`);
+  const j=await r.json();
+  itensModal=j.itens;
   renderItensTabela(itensModal);
   hideOverlay();
-  $('#modalItens').style.display = "flex";
+  $('#modalItens').style.display="flex";
 }
 
-function fecharModal(){
-  $('#modalItens').style.display = "none";
-}
+function fecharModal(){ $('#modalItens').style.display="none"; }
 
 function renderItensTabela(lista){
-  const tb = $('#tbItens tbody');
-  tb.innerHTML = "";
-  let total = 0;
+  const tb=$('#tbItens tbody');
+  tb.innerHTML="";
+  let total=0;
   lista.forEach(it=>{
-    const t = it.valorUnit * it.quantMin;
-    total += t;
-    tb.innerHTML += `
+    const t=it.valorUnit*it.quantMin; total+=t;
+    tb.innerHTML+=`
     <tr>
       <td>${it.itemTR}</td>
       <td>${it.especificacao}</td>
@@ -455,33 +375,40 @@ function renderItensTabela(lista){
       <td><b>${formatMoney(t)}</b></td>
     </tr>`;
   });
-  $('#totalGeral').innerText = "TOTAL: " + formatMoney(total);
+  $('#totalGeral').innerText="TOTAL: "+formatMoney(total);
 }
 
 function ordenar(i){
-  ordemAsc = !ordemAsc;
+  ordemAsc=!ordemAsc;
   itensModal.sort((a,b)=>{
-    const A = Object.values(a)[i];
-    const B = Object.values(b)[i];
-    if(typeof A === "number") return ordemAsc ? A-B : B-A;
-    return ordemAsc
-      ? String(A).localeCompare(String(B))
-      : String(B).localeCompare(String(A));
+    const A=Object.values(a)[i],B=Object.values(b)[i];
+    if(typeof A==="number")return ordemAsc?A-B:B-A;
+    return ordemAsc?String(A).localeCompare(String(B)):String(B).localeCompare(String(A));
   });
   renderItensTabela(itensModal);
 }
 
 async function carregar(){
   showOverlay();
-  const r = await fetch(`${API}?action=listLicitacoes`);
-  const j = await r.json();
-  licitacoes = j;
+  const r=await fetch(`${API}?action=listLicitacoes`);
+  const j=await r.json();
+  licitacoes=j;
   render();
   hideOverlay();
 }
 
-carregar();
+document.addEventListener("DOMContentLoaded",()=>{
+  carregar();
+  $('#busca').addEventListener('input',e=>{busca=e.target.value;render();});
+  $$('#filtros .chip').forEach(ch=>{
+    ch.addEventListener('click',()=>{
+      $$('#filtros .chip').forEach(x=>x.classList.remove('ativo'));
+      ch.classList.add('ativo');
+      filtro=ch.dataset.status;
+      render();
+    });
+  });
+});
 </script>
-
 </body>
 </html>
