@@ -489,13 +489,18 @@ function ordenar(i){
 /* CARREGAR */
 async function carregar(){
   $('#overlayLoad').classList.remove("hidden");
+
   const r = await fetch(`${API}?action=listLicitacoes`);
   const j = await r.json();
   licitacoes = j;
 
-  $('#overlayLoad').classList.add("hidden");
   render();
+
+  setTimeout(() => {
+    $('#overlayLoad').classList.add("hidden");
+  }, 150); 
 }
+
 carregar();
 </script>
 
