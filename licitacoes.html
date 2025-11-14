@@ -396,16 +396,15 @@ function formatMoney(v){
 function render(){
   const lista = $('#lista');
 
-  const dados = licitacoes.filter(l =>
-    (filtro==="TODOS" || l.status===filtro) &&
+  const dados = licitacoes.filter(l => 
+    (filtro === "TODOS" || l.status === filtro) &&
     (
-  l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
-  String(l.valorBR)?.includes(busca)
-)
-
+      l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
+      String(l.valorBR)?.includes(busca)
+    )
   );
 
   if(dados.length===0){
@@ -444,6 +443,7 @@ function render(){
 </div>
   `).join('');
 }
+
 
 /* ============================
    BUSCAS E FILTROS
