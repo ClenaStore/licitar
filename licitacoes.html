@@ -57,7 +57,6 @@ body{
   border:1px solid #ccd2d9;
   background:white;
   font-size:15px;
-  transition:.2s;
 }
 .input:focus{
   border-color:var(--azul);
@@ -78,7 +77,6 @@ body{
   border:1px solid #ccd2d9;
   cursor:pointer;
   font-weight:600;
-  transition:.2s;
 }
 .chip:hover{ background:#e9edf2; }
 .chip.ativo{ background:var(--azul); color:white; }
@@ -109,7 +107,7 @@ body{
   margin-bottom:14px;
 }
 
-/* BLOCO DE DADOS */
+/* BLOCO INFO */
 .info-block{
   margin-top:10px;
   padding:14px 16px;
@@ -122,7 +120,7 @@ body{
   margin-bottom:6px;
 }
 
-/* STATUS */
+/* BADGE */
 .badge{
   padding:8px 16px;
   border-radius:12px;
@@ -159,31 +157,8 @@ select{
   cursor:pointer;
   font-size:15px;
   font-weight:600;
-  transition:.2s;
 }
 .btn:hover{ background:#132a4d; }
-
-/* OVERLAY */
-#overlayLoad{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:300;
-}
-.hidden{ display:none; }
-
-.loader{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  border:7px solid #ddd;
-  border-top:7px solid var(--azul);
-  animation:spin .7s linear infinite;
-}
-@keyframes spin{ to{transform:rotate(360deg);} }
 
 /* MODAL */
 .modal{
@@ -202,19 +177,18 @@ select{
   background:white;
   border-radius:20px;
   box-shadow:var(--shadow);
-  animation:fade .25s ease;
   max-height:88vh;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
 }
-@keyframes fade{ from{opacity:0; transform:scale(.96);} to{opacity:1; transform:scale(1);} }
-
 .modal-head{
   padding:24px 30px;
   border-bottom:1px solid var(--line);
   background:white;
   position:sticky;
   top:0;
+  z-index:10;
 }
 .closeBtn{
   float:right;
@@ -232,7 +206,6 @@ select{
   border:1px solid var(--line);
   width:280px;
 }
-
 .modal-body{
   padding:16px 30px;
   overflow:auto;
@@ -247,7 +220,6 @@ select{
   bottom:0;
   text-align:right;
 }
-
 .table{
   width:100%;
   border-collapse:collapse;
@@ -267,9 +239,6 @@ select{
 
 <body>
 
-<!-- OVERLAY -->
-<div id="overlayLoad"><div class="loader"></div></div>
-
 <div class="titulo">LICITAR • Licitações</div>
 
 <div class="topo">
@@ -286,6 +255,7 @@ select{
 </div>
 
 <div class="grid" id="lista"></div>
+
 
 <!-- MODAL -->
 <div class="modal" id="modalItens">
@@ -332,25 +302,21 @@ let busca = "";
 let itensModal = [];
 let ordemAsc = true;
 
-/* FORMATADOR */
 function formatMoney(v){
   return "R$ " + Number(v).toLocaleString("pt-BR",{minimumFractionDigits:4,maximumFractionDigits:4});
 }
 
-/* RENDERIZA LISTA */
 function render(){
   const lista = $('#lista');
 
   const dados = licitacoes.filter(l =>
     (filtro==="TODOS" || l.status===filtro) &&
     (
-(
-  l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
-  l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
-  String(l.valorBR || "").includes(busca)
-)
+      l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
+      l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
+      String(l.valorBR)?.includes(busca)
     )
   );
 
@@ -383,19 +349,19 @@ function render(){
       <option value="SUSPENSA">Suspensa</option>
     </select>
 
-    <button class="btn" onclick="verItens('${l.codigo}', '${l.instituicao}')">Ver itens</button>
+    <button class="btn" onclick="verItens('${l.codigo}','${l.instituicao}')">
+      Ver itens
+    </button>
   </div>
 </div>
   `).join('');
 }
 
-/* BUSCA */
 $('#busca').addEventListener('input', e=>{
   busca = e.target.value;
   render();
 });
 
-/* FILTROS */
 $$('#filtros .chip').forEach(ch=>{
   ch.addEventListener('click',()=>{
     $$('#filtros .chip').forEach(x=>x.classList.remove('ativo'));
@@ -405,12 +371,7 @@ $$('#filtros .chip').forEach(ch=>{
   });
 });
 
-/* ALTERAR STATUS */
 async function alterarStatus(codigo, novoStatus){
-  if(!novoStatus){ alert("Selecione um status válido."); return; }
-
-  $('#overlayLoad').classList.remove("hidden");
-
   const payload = {action:"updateLicitacao", codigo, status:novoStatus};
 
   const r = await fetch(API,{
@@ -420,8 +381,6 @@ async function alterarStatus(codigo, novoStatus){
 
   const j = await r.json();
 
-  $('#overlayLoad').classList.add("hidden");
-
   if(j.ok){
     alert("Status atualizado!");
     carregar();
@@ -430,8 +389,6 @@ async function alterarStatus(codigo, novoStatus){
 
 /* MODAL */
 async function verItens(codigo,nome){
-  $('#overlayLoad').classList.remove("hidden");
-
   $('#tituloItens').innerText = "Itens da Licitação";
   $('#subItens').innerText = nome;
 
@@ -439,10 +396,7 @@ async function verItens(codigo,nome){
   const j = await r.json();
 
   itensModal = j.itens;
-
   renderItensTabela(itensModal);
-
-  $('#overlayLoad').classList.add("hidden");
 
   $('#modalItens').style.display = "flex";
 }
@@ -451,16 +405,15 @@ function fecharModal(){
   $('#modalItens').style.display = "none";
 }
 
-/* RENDER TABELA */
 function renderItensTabela(lista){
   const tb = $('#tbItens tbody');
   tb.innerHTML = "";
 
-  let totalGeral = 0;
+  let total = 0;
 
   lista.forEach(it=>{
-    const total = it.valorUnit * it.quantMin;
-    totalGeral += total;
+    const t = it.valorUnit * it.quantMin;
+    total += t;
 
     tb.innerHTML += `
     <tr>
@@ -470,39 +423,34 @@ function renderItensTabela(lista){
       <td>${it.quantMax}</td>
       <td>${it.quantMin}</td>
       <td>${formatMoney(it.valorUnit)}</td>
-      <td><b>${formatMoney(total)}</b></td>
+      <td><b>${formatMoney(t)}</b></td>
     </tr>`;
   });
 
-  $('#totalGeral').innerText = "TOTAL: " + formatMoney(totalGeral);
+  $('#totalGeral').innerText = "TOTAL: " + formatMoney(total);
 }
 
-/* ORDENAR */
 function ordenar(i){
   ordemAsc = !ordemAsc;
+
   itensModal.sort((a,b)=>{
     const A = Object.values(a)[i];
     const B = Object.values(b)[i];
     if(typeof A === "number") return ordemAsc ? A-B : B-A;
-    return ordemAsc ? String(A).localeCompare(String(B)) : String(B).localeCompare(String(A));
+    return ordemAsc
+      ? String(A).localeCompare(String(B))
+      : String(B).localeCompare(String(A));
   });
+
   renderItensTabela(itensModal);
 }
 
-/* CARREGAR */
 async function carregar(){
-  $('#overlayLoad').classList.remove("hidden");
-
   const r = await fetch(`${API}?action=listLicitacoes`);
   const j = await r.json();
 
   licitacoes = j;
-
   render();
-
-  setTimeout(() => {
-    $('#overlayLoad').classList.add("hidden");
-  }, 150);
 }
 
 carregar();
