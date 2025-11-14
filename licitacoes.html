@@ -10,7 +10,7 @@
 
 <style>
 /* ============================
-   PALETA ORIGINAL + PREMIUM
+   PALETA + VISUAL PREMIUM
 ============================ */
 :root{
   --bg:#eef2f7;
@@ -31,9 +31,7 @@
   --suspensa:#d7263d;
 }
 
-/* ============================
-   BASE
-============================ */
+/* BASE */
 body{
   margin:0;
   padding:40px;
@@ -42,6 +40,7 @@ body{
   color:var(--azul);
 }
 
+/* TÍTULO */
 .titulo{
   font-size:42px;
   font-weight:800;
@@ -49,12 +48,8 @@ body{
   letter-spacing:-1px;
 }
 
-/* ============================
-   INPUT DE BUSCA
-============================ */
-.topo{
-  margin-bottom:26px;
-}
+/* BUSCA */
+.topo{ margin-bottom:26px; }
 .input{
   width:420px;
   padding:15px 20px;
@@ -69,9 +64,7 @@ body{
   outline:none;
 }
 
-/* ============================
-   FILTROS
-============================ */
+/* FILTROS */
 .filtros{
   display:flex;
   gap:12px;
@@ -87,26 +80,17 @@ body{
   font-weight:600;
   transition:.2s;
 }
-.chip:hover{
-  background:#e9edf2;
-}
-.chip.ativo{
-  background:var(--azul);
-  color:#fff;
-}
+.chip:hover{ background:#e9edf2; }
+.chip.ativo{ background:var(--azul); color:white; }
 
-/* ============================
-   GRID
-============================ */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
   gap:32px;
 }
 
-/* ============================
-   CARD
-============================ */
+/* CARD */
 .card{
   background:var(--card-glass);
   backdrop-filter:blur(6px);
@@ -115,23 +99,17 @@ body{
   border:1px solid rgba(255,255,255,0.55);
   box-shadow:var(--shadow);
   transition:.25s;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
 }
-.card:hover{
-  transform:translateY(-6px);
-}
+.card:hover{ transform:translateY(-6px); }
 
-/* título da instituição */
 .card h3{
   font-size:23px;
-  margin-bottom:14px;
   font-weight:800;
   color:var(--azul-escuro);
+  margin-bottom:14px;
 }
 
-/* Blocos */
+/* BLOCO DE DADOS */
 .info-block{
   margin-top:10px;
   padding:14px 16px;
@@ -144,35 +122,38 @@ body{
   margin-bottom:6px;
 }
 
-/* Badge */
+/* STATUS */
 .badge{
   padding:8px 16px;
   border-radius:12px;
   font-size:12.5px;
   font-weight:700;
-  margin-top:16px;
+  margin-top:14px;
   display:inline-block;
 }
-.st-PENDENTE{background:var(--pendente); color:#fff;}
-.st-FUTURA{background:var(--futura); color:#fff;}
-.st-EM_ANDAMENTO{background:var(--andamento); color:#fff;}
-.st-FINALIZADA{background:var(--finalizada); color:#fff;}
-.st-SUSPENSA{background:var(--suspensa); color:#fff;}
+.st-PENDENTE{ background:var(--pendente); color:white; }
+.st-FUTURA{ background:var(--futura); color:white; }
+.st-EM_ANDAMENTO{ background:var(--andamento); color:white; }
+.st-FINALIZADA{ background:var(--finalizada); color:white; }
+.st-SUSPENSA{ background:var(--suspensa); color:white; }
 
-/* ======================================
-   AÇÕES DO CARD
-====================================== */
+/* AÇÕES */
 .card-actions{
+  margin-top:22px;
   display:flex;
   gap:14px;
-  margin-top:22px;
   align-items:center;
 }
-
+select{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid #ccd2d9;
+  font-size:14px;
+}
 .btn{
   padding:12px 20px;
   background:var(--azul);
-  color:#fff;
+  color:white;
   border:none;
   border-radius:12px;
   cursor:pointer;
@@ -180,42 +161,31 @@ body{
   font-weight:600;
   transition:.2s;
 }
-.btn:hover{
-  background:#132a4d;
-}
+.btn:hover{ background:#132a4d; }
 
-select{
-  padding:12px 14px;
-  border-radius:12px;
-  border:1px solid #ccd2d9;
-  font-size:14px;
-}
-
-/* ============================
-   OVERLAY / LOADING
-============================ */
+/* OVERLAY */
 #overlayLoad{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.55);
-  display:none;
+  display:flex;
   justify-content:center;
   align-items:center;
   z-index:300;
 }
+.hidden{ display:none; }
+
 .loader{
-  width:60px;
-  height:60px;
+  width:65px;
+  height:65px;
   border-radius:50%;
   border:7px solid #ddd;
   border-top:7px solid var(--azul);
-  animation:spin .75s linear infinite;
+  animation:spin .7s linear infinite;
 }
 @keyframes spin{ to{transform:rotate(360deg);} }
 
-/* ============================
-   MODAL PREMIUM
-============================ */
+/* MODAL */
 .modal{
   position:fixed;
   inset:0;
@@ -226,7 +196,6 @@ select{
   padding-top:40px;
   z-index:200;
 }
-
 .box{
   width:92%;
   max-width:1250px;
@@ -238,9 +207,9 @@ select{
   display:flex;
   flex-direction:column;
 }
-@keyframes fade{from{opacity:0; transform:scale(.96);} to{opacity:1; transform:scale(1);}}
+@keyframes fade{ from{opacity:0; transform:scale(.96);} to{opacity:1; transform:scale(1);} }
 
-/* Cabeçalho */
+/* CABEÇALHO MODAL */
 .modal-head{
   padding:24px 30px;
   border-bottom:1px solid var(--line);
@@ -248,20 +217,6 @@ select{
   position:sticky;
   top:0;
   z-index:20;
-}
-.modal-head h2{
-  margin:0;
-  margin-bottom:4px;
-  font-size:25px;
-  font-weight:800;
-  color:var(--azul-escuro);
-}
-.modal-search{
-  margin-top:12px;
-  padding:11px 14px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  width:280px;
 }
 .closeBtn{
   float:right;
@@ -271,52 +226,50 @@ select{
   border:none;
   border-radius:8px;
   cursor:pointer;
-  font-weight:600;
-  margin-bottom:12px;
+}
+.modal-search{
+  margin-top:12px;
+  padding:11px 14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  width:280px;
 }
 
-/* Corpo */
 .modal-body{
   padding:16px 30px;
   overflow:auto;
 }
-
-/* Footer */
 .modal-foot{
   padding:20px 30px;
-  border-top:1px solid var(--line);
   background:white;
+  border-top:1px solid var(--line);
   font-size:20px;
   font-weight:800;
-  text-align:right;
   position:sticky;
   bottom:0;
-  z-index:20;
+  text-align:right;
 }
 
-/* Tabela */
 .table{
   width:100%;
   border-collapse:collapse;
-  margin-top:16px;
+  margin-top:18px;
 }
 .table th{
   padding:12px;
   background:#f3f5f7;
-  font-size:14px;
-  font-weight:700;
   cursor:pointer;
 }
 .table td{
   padding:10px;
   border-bottom:1px solid #eee;
-  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- OVERLAY -->
 <div id="overlayLoad"><div class="loader"></div></div>
 
 <div class="titulo">LICITAR • Licitações</div>
@@ -336,9 +289,7 @@ select{
 
 <div class="grid" id="lista"></div>
 
-<!-- ============================
-     MODAL ITENS
-============================ -->
+<!-- MODAL -->
 <div class="modal" id="modalItens">
   <div class="box">
 
@@ -372,47 +323,43 @@ select{
 </div>
 
 <script>
-/* ============================
-   MESMAS FUNÇÕES
-============================ */
 const API = "https://script.google.com/macros/s/AKfycbwg9ZmsZpisEOI3J_3D0rS-Wwn0-dUD4yLVwxa7Yi1_pm0PAuu_HS3d7cB7Z5p0Il8s/exec";
 
-const $  = s => document.querySelector(s);
+const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 
 let licitacoes = [];
 let filtro = "TODOS";
-let busca  = "";
+let busca = "";
 let itensModal = [];
 let ordemAsc = true;
 
+/* FORMATADOR */
 function formatMoney(v){
   return "R$ " + Number(v).toLocaleString("pt-BR",{minimumFractionDigits:4,maximumFractionDigits:4});
 }
 
-/* ============================
-   RENDER LIST
-============================ */
+/* RENDERIZA LISTA */
 function render(){
   const lista = $('#lista');
 
-  const dados = licitacoes.filter(l => 
-    (filtro === "TODOS" || l.status === filtro) &&
+  const dados = licitacoes.filter(l =>
+    (filtro==="TODOS" || l.status===filtro) &&
     (
-      l.instituicao?.toUpperCase().includes(busca.toUpperCase()) ||
-      l.codigo?.toUpperCase().includes(busca.toUpperCase()) ||
-      l.criterio?.toUpperCase().includes(busca.toUpperCase()) ||
-      l.modo?.toUpperCase().includes(busca.toUpperCase()) ||
-      String(l.valorBR)?.includes(busca)
+      l.instituicao.toUpperCase().includes(busca.toUpperCase()) ||
+      l.codigo.toUpperCase().includes(busca.toUpperCase()) ||
+      l.criterio.toUpperCase().includes(busca.toUpperCase()) ||
+      l.modo.toUpperCase().includes(busca.toUpperCase()) ||
+      String(l.valorBR).includes(busca)
     )
   );
 
-  if(dados.length===0){
+  if(dados.length === 0){
     lista.innerHTML = "<p style='color:#6f7883'>Nenhuma licitação encontrada…</p>";
     return;
   }
 
- lista.innerHTML = dados.map(l => `
+  lista.innerHTML = dados.map(l => `
 <div class="card">
   <h3>${l.instituicao}</h3>
 
@@ -436,89 +383,77 @@ function render(){
       <option value="SUSPENSA">Suspensa</option>
     </select>
 
-    <button class="btn" onclick="verItens('${l.codigo}','${l.instituicao}')">
-      Ver itens
-    </button>
+    <button class="btn" onclick="verItens('${l.codigo}', '${l.instituicao}')">Ver itens</button>
   </div>
 </div>
-`).join('');
+  `).join('');
+}
 
-
-
-/* ============================
-   BUSCAS E FILTROS
-============================ */
+/* BUSCA */
 $('#busca').addEventListener('input', e=>{
   busca = e.target.value;
   render();
 });
-$$('#filtros .chip').forEach(c=>{
-  c.addEventListener('click',()=>{
+
+/* FILTROS */
+$$('#filtros .chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{
     $$('#filtros .chip').forEach(x=>x.classList.remove('ativo'));
-    c.classList.add('ativo');
-    filtro = c.dataset.status;
+    ch.classList.add('ativo');
+    filtro = ch.dataset.status;
     render();
   });
 });
 
-/* ============================
-   STATUS POST
-============================ */
+/* ALTERAR STATUS */
 async function alterarStatus(codigo, novoStatus){
-  if(!novoStatus) return alert("Selecione um status válido.");
+  if(!novoStatus){ alert("Selecione um status válido."); return; }
 
-  $('#overlayLoad').style.display="flex";
+  $('#overlayLoad').classList.remove("hidden");
 
-  const payload = {action:"updateLicitacao",codigo, status:novoStatus};
+  const payload = {action:"updateLicitacao", codigo, status:novoStatus};
 
   const r = await fetch(API,{
     method:"POST",
     body:JSON.stringify(payload)
   });
-  const j = await r.json();
 
-  $('#overlayLoad').style.display="none";
+  const j = await r.json();
+  $('#overlayLoad').classList.add("hidden");
 
   if(j.ok){
     alert("Status atualizado!");
     carregar();
-  }else{
-    alert("Erro ao atualizar.");
-  }
+  } else alert("Erro ao atualizar.");
 }
 
-/* ============================
-   VER ITENS
-============================ */
+/* MODAL */
 async function verItens(codigo,nome){
-  $('#overlayLoad').style.display="flex";
+  $('#overlayLoad').classList.remove("hidden");
 
-  $('#tituloItens').innerText="Itens da Licitação";
-  $('#subItens').innerText=nome;
+  $('#tituloItens').innerText = "Itens da Licitação";
+  $('#subItens').innerText = nome;
 
   const r = await fetch(`${API}?action=getItens&codigo=${codigo}`);
   const j = await r.json();
 
   itensModal = j.itens;
-
   renderItensTabela(itensModal);
 
-  $('#overlayLoad').style.display="none";
-  $('#modalItens').style.display="flex";
+  $('#overlayLoad').classList.add("hidden");
+  $('#modalItens').style.display = "flex";
 }
 
 function fecharModal(){
-  $('#modalItens').style.display="none";
+  $('#modalItens').style.display = "none";
 }
 
-/* ============================
-   TABELA DE ITENS
-============================ */
+/* RENDER TABELA */
 function renderItensTabela(lista){
   const tb = $('#tbItens tbody');
-  tb.innerHTML="";
+  tb.innerHTML = "";
 
-  let totalGeral=0;
+  let totalGeral = 0;
 
   lista.forEach(it=>{
     const total = it.valorUnit * it.quantMin;
@@ -533,16 +468,13 @@ function renderItensTabela(lista){
       <td>${it.quantMin}</td>
       <td>${formatMoney(it.valorUnit)}</td>
       <td><b>${formatMoney(total)}</b></td>
-    </tr>
-    `;
+    </tr>`;
   });
 
-  $('#totalGeral').innerHTML = "TOTAL: " + formatMoney(totalGeral);
+  $('#totalGeral').innerText = "TOTAL: " + formatMoney(totalGeral);
 }
 
-/* ============================
-   ORDENAR
-============================ */
+/* ORDENAR */
 function ordenar(i){
   ordemAsc = !ordemAsc;
   itensModal.sort((a,b)=>{
@@ -554,13 +486,14 @@ function ordenar(i){
   renderItensTabela(itensModal);
 }
 
-/* ============================
-   CARREGAR
-============================ */
+/* CARREGAR */
 async function carregar(){
+  $('#overlayLoad').classList.remove("hidden");
   const r = await fetch(`${API}?action=listLicitacoes`);
   const j = await r.json();
   licitacoes = j;
+
+  $('#overlayLoad').classList.add("hidden");
   render();
 }
 carregar();
