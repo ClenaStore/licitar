@@ -209,14 +209,12 @@ select{
 }
 @keyframes fade{ from{opacity:0; transform:scale(.96);} to{opacity:1; transform:scale(1);} }
 
-/* CABEÇALHO MODAL */
 .modal-head{
   padding:24px 30px;
   border-bottom:1px solid var(--line);
   background:white;
   position:sticky;
   top:0;
-  z-index:20;
 }
 .closeBtn{
   float:right;
@@ -419,6 +417,7 @@ async function alterarStatus(codigo, novoStatus){
   });
 
   const j = await r.json();
+
   $('#overlayLoad').classList.add("hidden");
 
   if(j.ok){
@@ -438,9 +437,11 @@ async function verItens(codigo,nome){
   const j = await r.json();
 
   itensModal = j.itens;
+
   renderItensTabela(itensModal);
 
   $('#overlayLoad').classList.add("hidden");
+
   $('#modalItens').style.display = "flex";
 }
 
@@ -492,13 +493,14 @@ async function carregar(){
 
   const r = await fetch(`${API}?action=listLicitacoes`);
   const j = await r.json();
+
   licitacoes = j;
 
   render();
 
   setTimeout(() => {
     $('#overlayLoad').classList.add("hidden");
-  }, 150); 
+  }, 150);
 }
 
 carregar();
